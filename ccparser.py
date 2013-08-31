@@ -14,7 +14,7 @@ rep = {'hxxp':'http', '[.]':'.'}
 daily_report = argv[1]
 # Open the file
 ccreport = open(daily_report, 'rb') 
-# Create outfile 
+# Create outfile (append to existing results file, "results.txt"
 cctotal = open('results.txt', 'a')
 # Print the date + time when the script is run and write to the results file
 report_time = str(datetime.now())
@@ -32,4 +32,6 @@ for line in ccreport:
 		cctotal.write("\n"+replaced)
 # Create a newline between each days' results
 cctotal.write("\n\n")
+# Close the file objects
+daily_report.close()
 cctotal.close()
