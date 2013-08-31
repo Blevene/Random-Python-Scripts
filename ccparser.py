@@ -14,14 +14,22 @@ rep = {'hxxp':'http', '[.]':'.'}
 daily_report = argv[1]
 # Open the file
 ccreport = open(daily_report, 'rb') 
-# Print the date + time when the script is run
-print datetime.now()
+# Create outfile 
+cctotal = open('results.txt', 'a')
+# Print the date + time when the script is run and write to the results file
+report_time = str(datetime.now())
+cctotal.write(report_time)
 # Iterate over the file, looking for lines that start with URL
 # For lines that start with URL, replace the text as defined
 # by the dict named rep
 for line in ccreport:
 	if line.startswith('URL'):
 		replaced = replace_things(line, rep)
- # This removes the "URL: " and trailing colon + newline		
+# This removes the "URL: " and trailing colon + newline		
 		replaced = replaced[5:-4]
 		print replaced
+# Write the list to resutls.txt
+		cctotal.write("\n"+replaced)
+# Create a newline between each days' results
+cctotal.write("\n\n")
+cctotal.close()
