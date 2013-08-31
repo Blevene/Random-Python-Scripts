@@ -1,38 +1,40 @@
 # Open and catalog list of samples observed for a given date
 # on Malshare.com, location: http://www.malshare.com/daily/malshare.current.txt
 # To Do:
+# [x] Create output file (csv or txt?)
+# [x] Store each md5 as a csv with 'hash' : 'date' mapping
 # [x] Add 'search' argument that searches result file for provided hash
 import urllib2
 import argparse
+import csv
 from sys import argv
-from datetime import date
+from datetime import datetime, date
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--search",
 	help="Search the consolidated results file for a hash")
 parser.add_argument("-p", "--pull", action="store_true",
 	help="Pull the most recent Malshare digest")
+if len(argv) < 2:
+	parser.print_help()
 args = parser.parse_args()
-pull_time = str(date.today())
+found = False
 if (args.pull):
 	mal_digest = urllib2.urlopen(url='http://www.malshare.com/daily/malshare.current.txt')
-	mal_digest = mal_digest.read()
-	mal_digest_all = open("results.txt", 'a')
-	mal_digest_all.write(pull_time + mal_digest + '\n')
-	mal_digest_all.close()
+	mal_digest = list(mal_digest)
+	pull_time = [str(date.today())] * len(mal_digest) 
+	strip_list = [x.strip('\n') for x in mal_digest]
+	dictionary = dict(zip(strip_list, pull_time))
+	writer = csv.writer(open('dictresults.csv', 'a'))
+	for key, value in dictionary.items():
+		writer.writerow([key, value])
+
 elif (args.search):
-	mal_digest_all = open("results.txt", 'r')
-	lines = mal_digest_all.read()
-	answer = lines.find(args.search)
-	if answer != -1:
-		print "The hash you searched for, %s, has been found" % args.search
-	else:
-		print "Sorry, we don't have that hash."
-
-
-	# with open("results.txt", "r") as f:
-	# 	searchlines = f.readlines()
-	# for line in enumerate(searchlines):
-	# 	if args.search in line:
-	# 		print args.search
-	# 		print "The hash you searched for, %s, has been found" % args.search
+	with open('dictresults.csv', 'r') as f:
+		reader = csv.reader(f)
+		for num, row in enumerate(reader):
+			if args.search in row[0]:
+				print "%s was seen on %s" % (row[0], row[1])
+				found = True
+		if found != True:
+			print "Sorry, we don't have that hash."
