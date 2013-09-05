@@ -6,7 +6,6 @@ import optparse
 import mechanize
 import os
 from datetime import date
-from BeautifulSoup import BeautifulSoup
 
 # Store the current date in isoformat, YYYY-MM-DD, as a string
 currentdate = str(date.today().isoformat())
