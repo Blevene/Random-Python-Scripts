@@ -1,6 +1,6 @@
 #!/bin/env/python
 
-#retrieve tor status 
+# Retrieve TOR exit node IPs
 
 import mechanize
 from datetime import datetime
