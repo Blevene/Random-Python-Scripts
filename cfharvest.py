@@ -1,7 +1,7 @@
 #!/bin/env/python
 
 
-#This should work, I'm just IP blocked for today - 9/4/2013
+#Harvest daily Cloudflare DNS changes. 
 import optparse
 import mechanize
 import os
