@@ -15,11 +15,13 @@ else:
 	infile = raw_input('Please type an absolute path to the .pcap file: ')
 	p=rdpcap(infile)
 	print "Reading %s now." % infile
-
+	
+	
 	if args.conversations:
 		p.conversations()
-
+		#[Code Here] https://github.com/d1b/scapy/blob/master/scapy/plist.py#L239
 	elif args.afterglow:
 		p.afterglow()
+		#[Code Here] https://github.com/d1b/scapy/blob/master/scapy/plist.py#L264
 
 print "Enjoy your visualization!"
