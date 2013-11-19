@@ -1,7 +1,10 @@
 #!/usr/bin/python
 
-#Leverage scapy to visualize pcaps. Inspired by Sean T
-#Written by Blevene
+'''
+Leverage scapy to visualize pcaps. 
+Inspired by Sean T
+Written by Blevene
+'''
 
 from scapy.all import *
 import argparse
