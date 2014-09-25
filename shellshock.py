@@ -25,7 +25,7 @@ def main(args):
 
 	conn.request("GET",args.uri,headers=headers)
 	res=conn.getresponse()
-	print res.response, res.reason
+	print res.status, res.reason
 	data = res.read()
 	print data
 if __name__ == '__main__': 
